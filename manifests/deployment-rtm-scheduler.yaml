@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: reproducer-deployment
+  namespace: dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: reproducer
+  template:
+    metadata:
+      labels:
+        app: reproducer
+    spec:
+      containers:
+      - name: reproducer
+        image: registry.access.redhat.com/ubi8/ubi
+        command: ["/bin/sh"]
+        args: ["-c", "sleep infinity"]
